@@ -40,3 +40,5 @@ Este projeto é um agente inteligente em Python que gerencia eventos no Google C
 - 25 - Em endpoints, na parte na direita, confira se está selecionado a opção localhost:7777/v1
 - 26 - Caso não apareça, clique em add endpoint, e cole: http://localhost/7777/v1
 - 27 - Ao finalizar, atualize a página, selecione o endpoint recém criado, e pronto!
+
+![agente bot](https://github.com/user-attachments/assets/90a3a4ac-676c-45c5-bc4e-88c211fb35a9)
