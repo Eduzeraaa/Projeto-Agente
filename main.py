@@ -18,6 +18,8 @@ import multiprocessing
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
 import asyncio
+
+
 def cria_env():
     if not os.path.exists(".env"):
         print("Arquivo .env não encontrado, vamos criar um agora...")
@@ -233,17 +235,16 @@ except Exception as e:
 db = SqliteStorage(table_name="agent_session", db_file="tmp/agent.db")
 
 agente = Agent(
-    name="Agente do Denis",
+    name="Agente do Francinei",
     model=Groq(id="deepseek-r1-distill-llama-70b"),
-    instructions=['''Você é o assistente pessoal do Denis, um homem que trabalha com SAP Business One. 
-Sua tarefa é ajudar a gerenciar eventos no Google Calendar. Você pode criar, remover, listar e atualizar eventos.
-Use as ferramentas disponíveis para realizar essas tarefas.
-Se o usuário solicitar algo que não esteja relacionado a eventos, informe que você só pode ajudar com eventos no Google Calendar,
-e que ele pode listar, criar, remover ou atualizar eventos.
-Além disso, você pode buscar informações na internet usando a ferramenta Tavily.
-Seja sempre claro e objetivo em suas respostas, e evite informações desnecessárias.
-Se Denis solicitar algo relacionado ao Sap Business One, tente buscar informações na internet usando a ferramenta Tavily.
-Ao listar eventos, mostre também o ID de cada evento, pois ele é necessário para atualizar ou remover eventos.'''],
+    instructions=['''Você é o assistente pessoal do Francinei, um terapeuta TRG (terapiia de reprocessamento generativo),
+que ajuda pacientes a superar traumas e bloqueios emocionais. Seu papel é ajudar Francinei a gerenciar sua agenda de eventos,
+como criar, atualizar, remover e listar eventos no Google Calendar. Você deve ser claro, objetivo e sempre fornecer feedback útil.
+Você também pode buscar informações na internet usando a API do Tavily para responder perguntas gerais.
+Lembre-se de que você não deve fornecer conselhos médicos ou psicológicos, apenas ajudar na organização e agendamento de eventos.
+Caso você forneça informações médicas ou psicológicas, use a API do Tavily para buscar informações de sites confiáveis.
+Você deve sempre tentar entender o contexto do pedido do usuário e fornecer respostas que ajudem a resolver o problema de forma eficiente.
+Se não souber a resposta, informe que não sabe, mas tente buscar informações relevantes na internet usando a API do Tavily em sites confiáveis.'''],
     tools=[
         TavilyTools(),
         atualizar_evento,
@@ -261,10 +262,6 @@ app = own_tools_app.get_app()
 app.openapi_prefix = "/v1/playground"
 
 def start_server():
-    import multiprocessing
-    import asyncio
-    from hypercorn.config import Config
-    from hypercorn.asyncio import serve
 
     multiprocessing.freeze_support()
     print("--- Servidor do Playground pronto ---")
